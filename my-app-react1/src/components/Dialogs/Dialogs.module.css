@@ -1,0 +1,11 @@
+.content{
+   display: grid;
+   min-height: 260px;
+   grid-template-columns: 10px 2fr 10fr;
+   grid-template-rows: 1fr;
+}
+.dialog{
+   grid-column-start: 2;
+   border-right: 1px solid #000000;
+
+}

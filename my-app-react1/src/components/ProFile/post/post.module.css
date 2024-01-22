@@ -1,0 +1,9 @@
+.AreaText{
+   margin: 50px ;
+   width: 500px;
+}
+.AreaText textarea{
+   resize:none;
+   height: 100px;
+   width: 500px;
+}
