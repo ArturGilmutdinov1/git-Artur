@@ -3,10 +3,10 @@ import stl from "./ProFile.module.css"
 import Post from "./post/post";
 import Info from "./Content/Info";
 
-const ProFile = () => {
+const ProFile = (props) => {
    return <div className={stl.content}>
       <Info name='Артур' />
-      <Post />
+      <Post postData={props.postData} />
    </div >
 }
 export default ProFile;

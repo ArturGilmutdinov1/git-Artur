@@ -8,7 +8,8 @@ import ProFile from './components/ProFile/ProFile';
 
 
 
-const App = () => {
+const App = (props) => {
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -16,8 +17,8 @@ const App = () => {
         <NavBar />
         <div className='appWrapper'>
           <Routes>
-            <Route path='/profile' element={<ProFile />} />
-            <Route path='/dialogs/*' element={<Dialogs />} />
+            <Route path='/profile' element={<ProFile postData={props.postData} />} />
+            <Route path='/dialogs/*' element={<Dialogs dialogData={props.dialogData} messageData={props.messageData} />} />
           </Routes>
         </div>
       </div>
