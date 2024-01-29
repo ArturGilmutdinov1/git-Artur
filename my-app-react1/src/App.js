@@ -5,7 +5,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import ProFile from './components/ProFile/ProFile';
-
+import Friends from './components/Friends/Friends';
 
 
 const App = (props) => {
@@ -18,10 +18,19 @@ const App = (props) => {
         <div className='appWrapper'>
           <Routes>
             <Route path='/profile'
-              element={<ProFile postData={props.appState.profillePage.postData} />} />
+              element={
+                <ProFile postData={props.state.profillePage.postData}
+                  addPost={props.addPost}
+                />
+              } />
             <Route path='/dialogs/*' element={<Dialogs
-              dialogData={props.appState.dialogPage.dialogData}
-              messageData={props.appState.dialogPage.messageData} />} />
+              dialogData={props.state.dialogPage.dialogData}
+              messageData={props.state.dialogPage.messageData}
+              sendMessage={props.sendMessage}
+            />} />
+            <Route path='/friends/*' element={<Friends
+              peopleDate={props.state.friends.people}
+            />} />
           </Routes>
         </div>
       </div>

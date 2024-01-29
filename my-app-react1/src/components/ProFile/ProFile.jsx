@@ -7,7 +7,7 @@ const ProFile = (props) => {
 
    return <div className={stl.content}>
       <Info name='Артур' />
-      <Post postData={props.postData} />
+      <Post postData={props.postData} addPost={props.addPost} />
    </div >
 }
 export default ProFile;
