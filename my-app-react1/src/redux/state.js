@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from "../render";
+let rerenderEntireTree = () => {
+   console.log("keke");
+}
 
 let state = {
    profillePage: {
@@ -7,6 +9,7 @@ let state = {
          { id: 2, message: 'asdхех', like: 2 },
          { id: 3, message: 'adsasdad', like: 3 },
       ],
+      newPostText: "",
    },
    dialogPage: {
       dialogData: [
@@ -24,6 +27,7 @@ let state = {
          { message: 'чебурек' },
          { message: 'мек-мек' },
       ],
+      newMessageText: "",
    },
    friends: {
       people: [
@@ -54,5 +58,18 @@ export let sendMessage = (messageFromFriend) => {
    rerenderEntireTree(state);
 }
 
+export let updateNewMessage = (newText) => {
+   state.profillePage.newPostText = newText;
+   rerenderEntireTree(state);
+}
+
+export let updateNewPost = (newText) => {
+   state.dialogPage.newMessageText = newText;
+   rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+   rerenderEntireTree = observer;
+}
 
 export default state;
