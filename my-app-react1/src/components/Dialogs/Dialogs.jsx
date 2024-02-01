@@ -5,7 +5,6 @@ import Contacts from "./Contacts/Contacts";
 
 
 const Dialogs = (props) => {
-
    let People = props.dialogData.map((el) => <Contacts name={el.name} id={el.id} />)
    let message = props.messageData.map((el) => <Message message={el.message} />)
 
@@ -17,8 +16,8 @@ const Dialogs = (props) => {
    }
 
    let onMessageChange = () => {
-      let text = newMessageElement.current.value;
-      props.updateNewMessage(text);
+      let textMessage = newMessageElement.current.value;
+      props.updateNewMessage(textMessage);
    }
 
    return (<div className={stl.border}>
