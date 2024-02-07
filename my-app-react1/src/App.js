@@ -21,15 +21,13 @@ const App = (props) => {
               element={
                 <ProFile
                   postData={props.state.profillePage}
-                  addPost={props.addPost}
-                  updateNewPost={props.updateNewPost}
+                  dispatch={props.dispatch}
                 />
               } />
             <Route path='/dialogs/*' element={<Dialogs
               dialogData={props.state.dialogPage.dialogData}
               messageData={props.state.dialogPage.messageData}
-              sendMessage={props.sendMessage}
-              updateNewMessage={props.updateNewMessage}
+              dispatch={props.dispatch}
             />} />
             <Route path='/friends/*' element={<Friends
               peopleDate={props.state.friends.people}

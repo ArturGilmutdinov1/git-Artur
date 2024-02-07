@@ -9,8 +9,7 @@ const ProFile = (props) => {
       <Post
          postData={props.postData.postData}
          newPostText={props.postData.newPostText}
-         addPost={props.addPost}
-         updateNewPost={props.updateNewPost} />
+         dispatch={props.dispatch} />
    </div >
 }
 export default ProFile;

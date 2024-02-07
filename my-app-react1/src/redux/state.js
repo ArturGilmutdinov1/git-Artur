@@ -1,3 +1,9 @@
+const SEND_MESSAGE = "SEND_MESSAGET"
+const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE"
+const ADD_POST = "ADD_POST"
+const UPDATE_NEW_POST = " UPDATE_NEW_POST"
+
+
 let store = {
    _state: {
       profillePage: {
@@ -35,42 +41,59 @@ let store = {
          ],
       },
    },
+   _rerenderEntireTree() {
+      console.log("keke");
+   },
+   subscribe(observer) {
+      this._rerenderEntireTree = observer;
+   },
    getState() {
       return this._state;
    },
-   rerenderEntireTree() {
-      console.log("keke");
-   },
-   addPost(postMessage) {
-      let newPost = {
-         id: 5,
-         message: postMessage,
-         like: 0,
-      };
-      this._state.profillePage.postData.push(newPost);
-      this.rerenderEntireTree(this._state);
-   },
-   sendMessage(messageFromFriend) {
-      let newMessage = {
-         message: messageFromFriend,
+
+   dispatch(action) {
+      if (action.type === SEND_MESSAGE) {
+         let newMessage = {
+            message: this._state.profillePage.newPostText,
+         }
+         this._state.dialogPage.messageData.push(newMessage);
+         this._rerenderEntireTree(this._state);
+      } else if (action.type === UPDATE_NEW_MESSAGE) {
+         this._state.profillePage.newPostText = action.newText;
+         this._rerenderEntireTree(this._state);
+      } else if (action.type === ADD_POST) {
+         let newPost = {
+            id: 5,
+            message: this._state.dialogPage.newMessageText,
+            like: 0,
+         };
+         this._state.profillePage.postData.push(newPost);
+         this._rerenderEntireTree(this._state);
+      } else if (action.type === UPDATE_NEW_POST) {
+         this._state.dialogPage.newMessageText = action.newText;
+         this._rerenderEntireTree(this._state);
       }
-      this._state.dialogPage.messageData.push(newMessage);
-      this.rerenderEntireTree(this._state);
-   },
-   updateNewMessage(newText) {
-      this._state.profillePage.newPostText = newText;
-      this.rerenderEntireTree(this._state);
-   },
-   updateNewPost(newText) {
-      this._state.dialogPage.newMessageText = newText;
-      this.rerenderEntireTree(this._state);
-   },
-   subscribe(observer) {
-      this.rerenderEntireTree = observer;
-   },
+   }
+
+}
+
+
+export const sendMessageActionCreator = () => {
+   return { type: SEND_MESSAGE }
+}
+
+export const updateNewMessageActionCreator = (text) => {
+   return { type: UPDATE_NEW_MESSAGE, newText: text }
+}
+
+export const addPostActionCreator = () => {
+   return { type: ADD_POST }
+}
+
+export const updateNewPostActionCreator = (text) => {
+   return { type: UPDATE_NEW_POST, newText: text }
 }
 
 
 
 export default store;
-window.store = store;
