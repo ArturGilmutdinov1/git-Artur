@@ -1,7 +1,6 @@
-const SEND_MESSAGE = "SEND_MESSAGET"
-const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE"
-const ADD_POST = "ADD_POST"
-const UPDATE_NEW_POST = " UPDATE_NEW_POST"
+import dialogReducer from "./dialogReducer";
+import profileReducer from "./profileReducer";
+
 
 
 let store = {
@@ -52,47 +51,16 @@ let store = {
    },
 
    dispatch(action) {
-      if (action.type === SEND_MESSAGE) {
-         let newMessage = {
-            message: this._state.profillePage.newPostText,
-         }
-         this._state.dialogPage.messageData.push(newMessage);
-         this._rerenderEntireTree(this._state);
-      } else if (action.type === UPDATE_NEW_MESSAGE) {
-         this._state.profillePage.newPostText = action.newText;
-         this._rerenderEntireTree(this._state);
-      } else if (action.type === ADD_POST) {
-         let newPost = {
-            id: 5,
-            message: this._state.dialogPage.newMessageText,
-            like: 0,
-         };
-         this._state.profillePage.postData.push(newPost);
-         this._rerenderEntireTree(this._state);
-      } else if (action.type === UPDATE_NEW_POST) {
-         this._state.dialogPage.newMessageText = action.newText;
-         this._rerenderEntireTree(this._state);
-      }
+      this._state.profillePage = profileReducer(this._state.profillePage, action);
+      this._state.dialogPage = dialogReducer(this._state.dialogPage, action);
+      this._rerenderEntireTree(this._state);
    }
 
 }
 
 
-export const sendMessageActionCreator = () => {
-   return { type: SEND_MESSAGE }
-}
 
-export const updateNewMessageActionCreator = (text) => {
-   return { type: UPDATE_NEW_MESSAGE, newText: text }
-}
 
-export const addPostActionCreator = () => {
-   return { type: ADD_POST }
-}
-
-export const updateNewPostActionCreator = (text) => {
-   return { type: UPDATE_NEW_POST, newText: text }
-}
 
 
 
