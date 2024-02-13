@@ -1,9 +1,25 @@
 const SEND_MESSAGE = "SEND_MESSAGET"
 const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE"
 
+let initialState = {
+   dialogData: [
+      { id: 1, name: 'Артур' },
+      { id: 2, name: 'Вадим' },
+      { id: 3, name: 'Айдар' },
+      { id: 4, name: 'Петя' },
+      { id: 5, name: 'Митя' },
+   ],
+   messageData: [
+      { message: 'привет' },
+      { message: 'здравствуй ' },
+      { message: 'кек' },
+      { message: 'чебурек' },
+      { message: 'мек-мек' },
+   ],
+   newMessageText: "",
+}
 
-
-const dialogReducer = (state, action) => {
+const dialogReducer = (state = initialState, action) => {
    switch (action.type) {
       case SEND_MESSAGE:
          let newMessage = {
