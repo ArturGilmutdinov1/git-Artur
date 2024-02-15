@@ -1,11 +1,11 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Dialogs from './components/Dialogs/Dialogs';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import ProFile from './components/ProFile/ProFile';
 import Friends from './components/Friends/Friends';
+import DialogsConteiner from './components/Dialogs/DialogsConteiner';
 
 
 const App = (props) => {
@@ -18,15 +18,9 @@ const App = (props) => {
         <div className='appWrapper'>
           <Routes>
             <Route path='/profile'
-              element={
-                <ProFile
-                  postData={props.state.profillePage}
-                  dispatch={props.dispatch}
-                />
-              } />
-            <Route path='/dialogs/*' element={<Dialogs
-              dialogData={props.state.dialogPage.dialogData}
-              messageData={props.state.dialogPage.messageData}
+              element={<ProFile />} />
+            <Route path='/dialogs/*' element={<DialogsConteiner
+              state={props.state}
               dispatch={props.dispatch}
             />} />
             <Route path='/friends/*' element={<Friends

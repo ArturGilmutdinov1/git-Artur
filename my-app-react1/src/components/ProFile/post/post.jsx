@@ -3,6 +3,7 @@ import MyPost from "./MyPost/Mypost";
 import stl from "./post.module.css";
 
 const Post = (props) => {
+
    let newPostElement = React.createRef();
 
    let publishPost = () => {
