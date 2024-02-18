@@ -19,10 +19,7 @@ const App = (props) => {
           <Routes>
             <Route path='/profile'
               element={<ProFile />} />
-            <Route path='/dialogs/*' element={<DialogsConteiner
-              state={props.state}
-              dispatch={props.dispatch}
-            />} />
+            <Route path='/dialogs/*' element={<DialogsConteiner />} />
             <Route path='/friends/*' element={<Friends
               peopleDate={props.state.friends.people}
             />} />
