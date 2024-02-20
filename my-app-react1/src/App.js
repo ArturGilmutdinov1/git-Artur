@@ -21,7 +21,7 @@ const App = (props) => {
               element={<ProFile />} />
             <Route path='/dialogs/*' element={<DialogsConteiner />} />
             <Route path='/friends/*' element={<Friends
-              peopleDate={props.state.friends.people}
+
             />} />
           </Routes>
         </div>
