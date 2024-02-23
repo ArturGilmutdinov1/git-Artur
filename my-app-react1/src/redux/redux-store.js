@@ -6,7 +6,7 @@ import peopleReducer from "./peopleReducer";
 let reducers = combineReducers({
    profillePage: profileReducer,
    dialogPage: dialogReducer,
-   friends: peopleReducer,
+   friendsPage: peopleReducer,
 }
 );
 
