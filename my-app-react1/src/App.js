@@ -4,9 +4,9 @@ import './App.css';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import ProFile from './components/ProFile/ProFile';
-import FriendsConteiner from './components/Friends/FriendsConteiner';
 import DialogsConteiner from './components/Dialogs/DialogsConteiner';
 import MusicConteiner from './components/music/MusicConteiner';
+import UsersConteiner from './components/Users/UsersConteiner';
 
 
 const App = (props) => {
@@ -20,7 +20,7 @@ const App = (props) => {
           <Routes>
             <Route path='/profile' element={<ProFile />} />
             <Route path='/dialogs/*' element={<DialogsConteiner />} />
-            <Route path='/friends/*' element={<FriendsConteiner />} />
+            <Route path='/friends/*' element={<UsersConteiner />} />
             <Route path='/music/*' element={<MusicConteiner />} />
           </Routes>
         </div>

@@ -1,29 +1,20 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = " SER_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = " SET_TOTAL_USERS_COUNT"
+
 
 const initialState = {
    users: [
-      {
-         id: 1,
-         photoUrl: 'https://cdn1.ozone.ru/s3/multimedia-d/6017882797.jpg',
-         followed: false,
-         fullName: 'Dmitry',
-         status: 'I am a boss',
-         location: { city: 'Minsk', country: 'Belarus' }
-      }, {
-         id: 2,
-         photoUrl: 'https://cdn1.ozone.ru/s3/multimedia-d/6017882797.jpg',
-         followed: true,
-         fullName: 'Dmitry',
-         status: 'I am a boss',
-         location: { city: 'Minsk', country: 'Belarus' }
-      },
    ],
+   pageSize: 5,
+   totalUserCount: 10,
+   currentPage: 1,
 }
 
 
-const peopleReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
    switch (action.type) {
       case FOLLOW:
          return {
@@ -45,8 +36,15 @@ const peopleReducer = (state = initialState, action) => {
                return user;
             })
          }
+      case SET_CURRENT_PAGE: {
+         return { ...state, currentPage: action.currentPage }
+      }
+      case SET_TOTAL_USERS_COUNT: {
+         return { ...state, totalUserCount: action.count }
+      }
+
       case SET_USERS: {
-         return { ...state, users: [...state.users, ...action.users] }
+         return { ...state, users: [...action.users] }
       }
       default:
          return state;
@@ -56,6 +54,8 @@ const peopleReducer = (state = initialState, action) => {
 export const followActionCreator = (userId) => ({ type: FOLLOW, userId })
 export const unfollowActionCreator = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsersActionCreator = (users) => ({ type: SET_USERS, users })
+export const setCurrentPageActionCreator = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
+export const setTotalUsersCountAC = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
 
 
-export default peopleReducer;
+export default usersReducer;
