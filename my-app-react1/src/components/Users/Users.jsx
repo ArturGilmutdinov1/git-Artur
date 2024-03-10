@@ -1,5 +1,6 @@
 import React from "react";
 import stl from './Users.module.css'
+import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
    //let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
@@ -20,7 +21,9 @@ const Users = (props) => {
       {props.peopleDate.map(users => <div key={users.id}  >
          <div className={stl.conteiner}>
             <div>
-               <img src={users.photos.small != null ? users.photos.small : "https://4x4photo.ru/wp-content/uploads/2023/08/91fdb41a-bd83-4993-b9ce-7ec0e34d35a9.jpg"} alt="" className={stl.userPhoto} />
+               <NavLink to={'/proFile/' + users.id}>
+                  <img src={users.photos.small != null ? users.photos.small : "https://4x4photo.ru/wp-content/uploads/2023/08/91fdb41a-bd83-4993-b9ce-7ec0e34d35a9.jpg"} alt="" className={stl.userPhoto} />
+               </NavLink>
             </div>
             <div>{users.name}</div>
             <div>{users.status}</div>

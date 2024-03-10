@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
-import ProFile from './components/ProFile/ProFile';
 import DialogsConteiner from './components/Dialogs/DialogsConteiner';
 import MusicConteiner from './components/music/MusicConteiner';
 import UsersConteiner from './components/Users/UsersConteiner';
+import ProfileContainer from './components/ProFile/ProfileConteiner';
 
 
 const App = (props) => {
@@ -18,7 +18,7 @@ const App = (props) => {
         <NavBar />
         <div className='appWrapper'>
           <Routes>
-            <Route path='/profile' element={<ProFile />} />
+            <Route path='/profile/*' element={<ProfileContainer />} />
             <Route path='/dialogs/*' element={<DialogsConteiner />} />
             <Route path='/friends/*' element={<UsersConteiner />} />
             <Route path='/music/*' element={<MusicConteiner />} />
