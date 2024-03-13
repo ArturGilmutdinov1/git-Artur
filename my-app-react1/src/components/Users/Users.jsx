@@ -1,6 +1,7 @@
 import React from "react";
 import stl from './Users.module.css'
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Users = (props) => {
    //let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
@@ -32,10 +33,29 @@ const Users = (props) => {
          </div>
          <div className={stl.button}>
             {users.followed
-               ? <button onClick={() => { props.unfollow(users.id); }}>удалить</button>
-               : <button onClick={() => { props.follow(users.id) }}>добавить</button>
+               ? < button onClick={() => axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${users.id}`,
+                  {
+                     withCredentials: true,
+                     headers: { "API-KEY": "a9cf1604-ec96-406a-9f8c-365df646aeaf" }
+                  })
+                  .then(response => {
+                     if (response.data.resultCode === 0) {
+                        props.unfollow(users.id);
+                     }
+                  })}>удалить</button>
+               : <button onClick={() => {
+                  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${users.id}`, {},
+                     {
+                        withCredentials: true,
+                        headers: { "API-KEY": "a9cf1604-ec96-406a-9f8c-365df646aeaf" }
+                     })
+                     .then(response => {
+                        if (response.data.resultCode === 0) {
+                           props.follow(users.id);
+                        }
+                     })
+               }}>добавить</button>
             }
-
          </div>
       </div>
       )

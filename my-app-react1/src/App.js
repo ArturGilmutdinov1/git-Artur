@@ -1,12 +1,12 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import DialogsConteiner from './components/Dialogs/DialogsConteiner';
 import MusicConteiner from './components/music/MusicConteiner';
 import UsersConteiner from './components/Users/UsersConteiner';
 import ProfileContainer from './components/ProFile/ProfileConteiner';
+import HeaderConteiner from './components/Header/HeaderConteiner';
 
 
 const App = (props) => {
@@ -14,11 +14,11 @@ const App = (props) => {
 
     <BrowserRouter>
       <div className="App">
-        <Header />
+        <HeaderConteiner />
         <NavBar />
         <div className='appWrapper'>
           <Routes>
-            <Route path='/profile/*' element={<ProfileContainer />} />
+            <Route path='/profile/:userId?' element={<ProfileContainer />} />
             <Route path='/dialogs/*' element={<DialogsConteiner />} />
             <Route path='/friends/*' element={<UsersConteiner />} />
             <Route path='/music/*' element={<MusicConteiner />} />
