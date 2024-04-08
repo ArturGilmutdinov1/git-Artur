@@ -1,9 +1,13 @@
-import { combineReducers, legacy_createStore as createStore } from "redux";
-import profileReducer from "./profileReducer";
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
+import { reducer as formReducer } from "redux-form";
+import authReducer from "./auth-reducer";
 import dialogReducer from "./dialogReducer";
 import musicReducer from "./musicReducer";
+import profileReducer from "./profileReducer";
 import usersReducer from "./usersReducer";
-import authReducer from "./auth-reducer";
+
+import { thunk } from "redux-thunk";
+const thunkMiddleware = thunk;
 
 let reducers = combineReducers({
    profillePage: profileReducer,
@@ -11,11 +15,13 @@ let reducers = combineReducers({
    friendsPage: usersReducer,
    musicPage: musicReducer,
    auth: authReducer,
+   form: formReducer,
 }
 );
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 window.store = store;
 
 export default store;
+

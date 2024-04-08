@@ -1,6 +1,7 @@
 import React from "react";
-import stl from "./Info.module.css"
 import Preloader from "../../common/Preloader/Preloader";
+import stl from "./Info.module.css";
+import ProfileStatus from './ProfileStatus';
 
 
 const Info = (props) => {
@@ -27,6 +28,7 @@ const Info = (props) => {
             <div className={stl.information__сomplete}>
                aboutMe:{props.profile.aboutMe}
             </div>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
          </div>
       </div>
    </div>

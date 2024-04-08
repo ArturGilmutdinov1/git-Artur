@@ -1,15 +1,16 @@
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/NavBar/NavBar';
 import DialogsConteiner from './components/Dialogs/DialogsConteiner';
-import MusicConteiner from './components/music/MusicConteiner';
-import UsersConteiner from './components/Users/UsersConteiner';
-import ProfileContainer from './components/ProFile/ProfileConteiner';
 import HeaderConteiner from './components/Header/HeaderConteiner';
+import NavBar from './components/NavBar/NavBar';
+import ProfileContainer from './components/ProFile/ProfileConteiner';
+import UsersConteiner from './components/Users/UsersConteiner';
+import Login from './components/login/login';
+import MusicConteiner from './components/music/MusicConteiner';
 
 
-const App = (props) => {
+const App = () => {
   return (
 
     <BrowserRouter>
@@ -22,6 +23,7 @@ const App = (props) => {
             <Route path='/dialogs/*' element={<DialogsConteiner />} />
             <Route path='/friends/*' element={<UsersConteiner />} />
             <Route path='/music/*' element={<MusicConteiner />} />
+            <Route path='/login/*' element={<Login />} />
           </Routes>
         </div>
       </div>

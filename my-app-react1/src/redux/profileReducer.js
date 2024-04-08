@@ -1,6 +1,8 @@
+import { profileApi, usersApi } from "../API/api";
+
 const ADD_POST = "ADD_POST";
-const UPDATE_NEW_POST = "UPDATE_NEW_POST";
 const SET_USER_PROFILE = ' SET_USER_PROFILE';
+const SET_STATUS_PROFILE = ' SET_STATUS_PROFILE';
 
 let initialState = {
    postData: [
@@ -9,7 +11,8 @@ let initialState = {
       { id: 3, message: 'adsasdad', like: 3 },
    ],
    newPostText: "",
-   profile: null
+   profile: null,
+   status: "",
 }
 
 
@@ -21,29 +24,55 @@ const profileReducer = (state = initialState, action) => {
             ...state,
             postData: [...state.postData, {
                id: 5,
-               message: state.newPostText,
+               message: action.values,
                like: 0,
             }
             ],
-            newPostText: "",
-         }
-      case UPDATE_NEW_POST:
-         return {
-            ...state,
-            newPostText: action.newText,
          }
       case SET_USER_PROFILE: {
          return { ...state, profile: action.profile }
       }
+      case SET_STATUS_PROFILE: {
+         return { ...state, status: action.status }
+      }
+
+
+
       default:
          return state;
    }
 }
 
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostActionCreator = (text) => ({ type: UPDATE_NEW_POST, newText: text });
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+
+export const addPostActionCreator = (values) => ({ type: ADD_POST, values });
+
+const setUsersProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+const setStatus = (status) => ({ type: SET_STATUS_PROFILE, status })
+
+export const getUsersProfile = (userId) => (dispatch) => {
+   usersApi.getProfile(userId)
+      .then(response => {
+         dispatch(setUsersProfile(response.data))
+      })
+}
+
+export const getStatusProfile = (userId) => (dispatch) => {
+   profileApi.getStatus(userId)
+      .then(response => { dispatch(setStatus(response.data)) })
+}
+
+export const updateStatusProfile = (status) => (dispatch) => {
+   profileApi.updateStatus(status)
+      .then(response => {
+         if (response.resultCode === 0) {
+            dispatch(setStatus(status))
+         }
+      })
+}
 
 
-export default profileReducer;
+
+
+
+export default profileReducer

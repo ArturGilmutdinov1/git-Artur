@@ -1,9 +1,11 @@
-import React from "react"
-import ProFile from "./ProFile";
+import React from "react";
 import { connect } from "react-redux";
-import { setUserProfile } from "../../redux/profileReducer";
-import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { compose } from "redux";
+import { witchAuthRedirect } from "../../hoc/witchAuthRedirect";
+import { getUsersProfile } from "../../redux/profileReducer";
+import { getStatusProfile, updateStatusProfile } from './../../redux/profileReducer';
+import ProFile from "./ProFile";
 
 
 function withRouter(Children) {
@@ -17,31 +19,33 @@ function withRouter(Children) {
 
 class ProfileContainer extends React.Component {
    componentDidMount() {
-
       let userId = this.props.match.params.userId;
       if (!userId) {
-         userId = 2;
+         userId = 30914;
       }
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-         .then(response => {
-            this.props.setUserProfile(response.data)
-         })
-
-
+      this.props.getUsersProfile(userId);
+      this.props.getStatusProfile(userId);
    }
 
    render() {
       return (
-         <ProFile {... this.props} profile={this.props.profile} />
+         <ProFile {... this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusProfile} />
       )
    }
 
 }
 
+
+
 let mapStateToProps = (state) => ({
-   profile: state.profillePage.profile
+   profile: state.profillePage.profile,
+   status: state.profillePage.status,
 })
 
-const WhitsUrlContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, { setUserProfile })(WhitsUrlContainerComponent);
+
+export default compose(
+   connect(mapStateToProps, { getUsersProfile, getStatusProfile, updateStatusProfile }),
+   withRouter,
+   witchAuthRedirect,
+)(ProfileContainer)

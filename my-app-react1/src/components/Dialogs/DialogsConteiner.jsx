@@ -1,7 +1,8 @@
-import React from "react";
-import { sendMessageActionCreator, updateNewMessageActionCreator } from "../../redux/dialogReducer";
-import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { witchAuthRedirect } from "../../hoc/witchAuthRedirect";
+import { sendMessageActionCreator } from "../../redux/dialogReducer";
+import Dialogs from "./Dialogs";
 
 
 let mapStateToProps = (state) => {
@@ -13,15 +14,17 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
    return {
-      updateNewMessageBody: () => {
-         dispatch(sendMessageActionCreator());
-      },
-      sendMessage: (textMessage) => {
-         dispatch(updateNewMessageActionCreator(textMessage));
+      updateNewMessageBody: (newMessageText) => {
+         dispatch(sendMessageActionCreator(newMessageText));
       }
    }
 };
 
-const DialogsConteiner = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
-export default DialogsConteiner;
+
+
+export default compose(
+   connect(mapStateToProps, mapDispatchToProps),
+   witchAuthRedirect,
+)(Dialogs)
+
