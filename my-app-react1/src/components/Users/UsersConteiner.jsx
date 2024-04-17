@@ -3,6 +3,7 @@ import Users from './Users';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { currentPage, followingInProgress, getUsersSelector, isFetching, pageSize, totalUserCount } from '../../redux/selector/users-selector';
 import { follow, getUsers, unfollow } from '../../redux/usersReducer';
 import Preloader from '../common/Preloader/Preloader';
 
@@ -38,12 +39,12 @@ class UsersApiComponent extends React.Component {
 };
 const mapStateToProps = (state) => {
    return {
-      peopleDate: state.friendsPage.users,
-      pageSize: state.friendsPage.pageSize,
-      totalUserCount: state.friendsPage.totalUserCount,
-      currentPage: state.friendsPage.currentPage,
-      isFetching: state.friendsPage.isFetching,
-      followingInProgress: state.friendsPage.followingInProgress,
+      peopleDate: getUsersSelector(state),
+      pageSize: pageSize(state),
+      totalUserCount: totalUserCount(state),
+      currentPage: currentPage(state),
+      isFetching: isFetching(state),
+      followingInProgress: followingInProgress(state),
    }
 };
 

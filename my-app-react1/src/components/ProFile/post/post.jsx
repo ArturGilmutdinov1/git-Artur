@@ -20,8 +20,8 @@ const PostForm = (props) => {
 const PostReduxForm = reduxForm({ form: 'post' })(PostForm)
 
 
-const Post = (props) => {
-
+const Post = React.memo(props => {
+   debugger
    let publishPost = (values) => {
       props.addPostActionCreator(values.newMessageBody)
    }
@@ -33,6 +33,6 @@ const Post = (props) => {
       <PostReduxForm onSubmit={publishPost} />
       {AllPosts}
    </div >
-}
+})
 
 export default Post;
