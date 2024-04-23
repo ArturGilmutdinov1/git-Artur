@@ -50,25 +50,20 @@ export const addPostActionCreator = (values) => ({ type: ADD_POST, values });
 const setUsersProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 const setStatus = (status) => ({ type: SET_STATUS_PROFILE, status })
 
-export const getUsersProfile = (userId) => (dispatch) => {
-   usersApi.getProfile(userId)
-      .then(response => {
-         dispatch(setUsersProfile(response.data))
-      })
+export const getUsersProfile = (userId) => async (dispatch) => {
+   let response = await usersApi.getProfile(userId)
+   dispatch(setUsersProfile(response.data))
 }
 
-export const getStatusProfile = (userId) => (dispatch) => {
-   profileApi.getStatus(userId)
-      .then(response => { dispatch(setStatus(response.data)) })
+export const getStatusProfile = (userId) => async (dispatch) => {
+   let response = await profileApi.getStatus(userId)
+   dispatch(setStatus(response.data))
 }
-
-export const updateStatusProfile = (status) => (dispatch) => {
-   profileApi.updateStatus(status)
-      .then(response => {
-         if (response.resultCode === 0) {
-            dispatch(setStatus(status))
-         }
-      })
+export const updateStatusProfile = (status) => async (dispatch) => {
+   let response = await profileApi.updateStatus(status)
+   if (response.resultCode === 0) {
+      dispatch(setStatus(status))
+   }
 }
 
 
