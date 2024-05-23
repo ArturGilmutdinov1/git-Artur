@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { compose } from "redux";
 import { witchAuthRedirect } from "../../hoc/witchAuthRedirect";
-import { getUsersProfile } from "../../redux/profileReducer";
+import { getUsersProfile, saveDataProfile, savePhoto } from "../../redux/profileReducer";
 import { getStatusProfile, updateStatusProfile } from './../../redux/profileReducer';
 import ProFile from "./ProFile";
 
@@ -18,7 +18,7 @@ function withRouter(Children) {
 
 
 class ProfileContainer extends React.Component {
-   componentDidMount() {
+   refreshPropfile() {
       let userId = this.props.match.params.userId;
       if (!userId) {
          userId = this.props.authorizedUserID;
@@ -30,9 +30,26 @@ class ProfileContainer extends React.Component {
       this.props.getStatusProfile(userId);
    }
 
+   componentDidMount() {
+      this.refreshPropfile();
+   }
+
+   componentDidUpdate(prevProps, prevState, snapshot) {
+      if (this.props.match.params.userId !== prevProps.match.params.userId) {
+         this.refreshPropfile();
+      }
+   }
+
    render() {
       return (
-         <ProFile {... this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusProfile} />
+         <ProFile {... this.props}
+            profile={this.props.profile}
+            status={this.props.status}
+            updateStatus={this.props.updateStatusProfile}
+            owner={this.props.match.params.userId}
+            savePhoto={this.props.savePhoto}
+            saveDataProfile={this.props.saveDataProfile}
+         />
       )
    }
 
@@ -49,7 +66,7 @@ let mapStateToProps = (state) => ({
 
 
 export default compose(
-   connect(mapStateToProps, { getUsersProfile, getStatusProfile, updateStatusProfile }),
+   connect(mapStateToProps, { getUsersProfile, getStatusProfile, updateStatusProfile, savePhoto, saveDataProfile }),
    withRouter,
    witchAuthRedirect,
 )(ProfileContainer)

@@ -41,6 +41,18 @@ export const profileApi = {
    updateStatus(status) {
       return intstance.put('profile/status', { status: status })
    },
+   savePhoto(photo) {
+      const formData = new FormData();
+      formData.append('image', photo)
+      return intstance.put('profile/photo', formData, {
+         headers: {
+            'Content-Type': 'multipart/form-data'
+         }
+      })
+   },
+   saveData(profile) {
+      return intstance.put('profile', { profile })
+   }
 }
 
 export const autApi = {
@@ -53,5 +65,4 @@ export const autApi = {
    logout() {
       return intstance.delete(`auth/login`)
    }
-
 }

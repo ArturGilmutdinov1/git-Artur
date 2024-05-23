@@ -1,5 +1,5 @@
 import React from "react";
-import stl from "./Music.module.css"
+import stl from "./Music.module.css";
 
 
 const Music = (props) => {

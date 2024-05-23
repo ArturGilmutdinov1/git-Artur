@@ -21,7 +21,6 @@ const PostReduxForm = reduxForm({ form: 'post' })(PostForm)
 
 
 const Post = React.memo(props => {
-   debugger
    let publishPost = (values) => {
       props.addPostActionCreator(values.newMessageBody)
    }

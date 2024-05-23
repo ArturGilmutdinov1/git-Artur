@@ -3,6 +3,7 @@ import { profileApi, usersApi } from "../API/api";
 const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = ' SET_USER_PROFILE';
 const SET_STATUS_PROFILE = ' SET_STATUS_PROFILE';
+const SET_PHOTO_PROFILE = 'SET_PHOTO_PROFILE';
 
 let initialState = {
    postData: [
@@ -35,9 +36,11 @@ const profileReducer = (state = initialState, action) => {
       case SET_STATUS_PROFILE: {
          return { ...state, status: action.status }
       }
-
-
-
+      case SET_PHOTO_PROFILE: {
+         return {
+            ...state, profile: { ...state.profile, photos: action.photo }
+         }
+      }
       default:
          return state;
    }
@@ -49,6 +52,8 @@ export const addPostActionCreator = (values) => ({ type: ADD_POST, values });
 
 const setUsersProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 const setStatus = (status) => ({ type: SET_STATUS_PROFILE, status })
+const setPhotoSuccess = (photo) => ({ type: SET_PHOTO_PROFILE, photo })
+
 
 export const getUsersProfile = (userId) => async (dispatch) => {
    let response = await usersApi.getProfile(userId)
@@ -66,7 +71,26 @@ export const updateStatusProfile = (status) => async (dispatch) => {
    }
 }
 
+export const savePhoto = (photo) => async (dispatch) => {
+   let response = await profileApi.savePhoto(photo);
+   if (response.data.resultCode === 0) {
+      dispatch(setPhotoSuccess(response.data.data.photos))
+   }
+}
 
+
+export const saveDataProfile = (profile) => async (dispatch, getState) => {
+   debugger
+   const userID = getState().auth.userId
+   let response = await profileApi.saveData(profile);
+   if (response.data.resultCode === 0) {
+      dispatch(getUsersProfile(userID))
+   }
+   // else{
+   //    dispatch(stopSubmit('info',{"contacts":{'facebook:responce.data.messages[0]}}))
+   // } допилить
+
+}
 
 
 

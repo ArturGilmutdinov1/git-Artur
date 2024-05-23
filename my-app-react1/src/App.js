@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { connect } from "react-redux";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HeaderConteiner from './components/Header/HeaderConteiner';
 import NavBar from './components/NavBar/NavBar';
@@ -28,7 +28,7 @@ class App extends React.Component {
       return <Preloader />
     }
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <div className="App">
           <HeaderConteiner />
           <NavBar />
@@ -44,7 +44,7 @@ class App extends React.Component {
             </Suspense>
           </div>
         </div>
-      </BrowserRouter >
+      </HashRouter>
     );
   }
 }

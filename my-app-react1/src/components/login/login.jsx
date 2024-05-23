@@ -9,7 +9,6 @@ import { Input } from "../common/Preloader/FormControll/FormControl";
 
 const LoginForm = (props) => {
    const maxLength = maxLengthCreator(50)
-
    return <form onSubmit={props.handleSubmit}>
       <div>
          <Field placeholder={'login'} name={"email"} component={Input} type="text" validate={[required, maxLength]} />
@@ -29,7 +28,6 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({ form: 'contact' })(LoginForm)
 
 const Login = (props) => {
-
    const onSubmit = (formData) => {
       props.login(formData.email, formData.password, formData.reremberMe)
    }

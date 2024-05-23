@@ -5,7 +5,7 @@ import PostConteiner from "./post/postСonteiner";
 
 const ProFile = (props) => {
    return <div className={stl.content}>
-      <Info profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
+      <Info profile={props.profile} status={props.status} updateStatus={props.updateStatus} userID={props.authorizedUserID} savePhoto={props.savePhoto} saveDataProfile={props.saveDataProfile} />
       <PostConteiner />
    </div >
 }

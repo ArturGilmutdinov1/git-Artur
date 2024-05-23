@@ -7,18 +7,16 @@ const Header = (props) => {
 
    let [called, setCalled] = useState(false)
 
-   let pressTheButton = (called) => {
-      (called === true)
-         ? setCalled(false)
-         : setCalled(true)
+   let pressTheButton = () => {
+      setCalled(!called)
    }
 
 
    return <header className={stl.header}>
-      <img src='https://www.svgrepo.com/show/396535/fox.svg'></img>
+      <img src='https://www.svgrepo.com/show/396535/fox.svg' alt=""></img>
       <div className={stl.login}>
          {props.isAuth
-            ? <div onClick={() => pressTheButton(called)}>
+            ? <div onClick={pressTheButton}>
                {props.login}
                {called && <ModuleWindow logout={props.logout} />}
                {!called && null}
