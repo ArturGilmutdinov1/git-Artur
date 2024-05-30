@@ -51,7 +51,8 @@ export const profileApi = {
       })
    },
    saveData(profile) {
-      return intstance.put('profile', { profile })
+      debugger
+      return intstance.put(`profile`, profile)
    }
 }
 
@@ -59,10 +60,13 @@ export const autApi = {
    me() {
       return intstance.get(`auth/me/`)
    },
-   login(email, password, rememberMe = false) {
-      return intstance.post(`auth/login`, { email, password, rememberMe })
+   login(email, password, rememberMe = false, captcha = null) {
+      return intstance.post(`auth/login`, { email, password, rememberMe,   })
    },
    logout() {
       return intstance.delete(`auth/login`)
+   },
+   getCaptcha() {
+      return intstance.get(`/security/get-captcha-url`)
    }
 }

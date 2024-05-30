@@ -56,39 +56,59 @@ const setPhotoSuccess = (photo) => ({ type: SET_PHOTO_PROFILE, photo })
 
 
 export const getUsersProfile = (userId) => async (dispatch) => {
-   let response = await usersApi.getProfile(userId)
-   dispatch(setUsersProfile(response.data))
+   try {
+      let response = await usersApi.getProfile(userId)
+      dispatch(setUsersProfile(response.data))
+   }
+   catch (e) {
+      alert(e)
+   }
 }
 
 export const getStatusProfile = (userId) => async (dispatch) => {
-   let response = await profileApi.getStatus(userId)
-   dispatch(setStatus(response.data))
+   try {
+      let response = await profileApi.getStatus(userId)
+      dispatch(setStatus(response.data))
+   }
+   catch (e) {
+      alert(e)
+   }
 }
 export const updateStatusProfile = (status) => async (dispatch) => {
-   let response = await profileApi.updateStatus(status)
-   if (response.resultCode === 0) {
-      dispatch(setStatus(status))
+   try {
+      let response = await profileApi.updateStatus(status)
+      if (response.resultCode === 0) {
+         dispatch(setStatus(status))
+      }
+   } catch (e) {
+      alert(e)
    }
 }
 
 export const savePhoto = (photo) => async (dispatch) => {
-   let response = await profileApi.savePhoto(photo);
-   if (response.data.resultCode === 0) {
-      dispatch(setPhotoSuccess(response.data.data.photos))
+   try {
+      let response = await profileApi.savePhoto(photo);
+      if (response.data.resultCode === 0) {
+         dispatch(setPhotoSuccess(response.data.data.photos))
+      }
+   } catch (e) {
+      alert(e)
    }
 }
 
 
 export const saveDataProfile = (profile) => async (dispatch, getState) => {
-   debugger
-   const userID = getState().auth.userId
-   let response = await profileApi.saveData(profile);
-   if (response.data.resultCode === 0) {
-      dispatch(getUsersProfile(userID))
+
+   const userID = getState().auth.userId;
+
+   try {
+      let response = await profileApi.saveData(profile);
+      if (response.data.resultCode === 0) {
+         dispatch(getUsersProfile(userID))
+      }
+   } catch (e) {
+      alert(e)
    }
-   // else{
-   //    dispatch(stopSubmit('info',{"contacts":{'facebook:responce.data.messages[0]}}))
-   // } допилить
 
 }
 

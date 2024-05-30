@@ -9,13 +9,13 @@ let SettingForm = (props) => {
    const maxLength = maxLengthCreator(50)
    return <form onSubmit={props.handleSubmit}>
       <div>
-         <b>job</b> <Field placeholder={'job'} name={"lookingForAJobDescription"} component={Input} validate={[required, maxLength]} type="text" />
+         <b>aboutMe</b> <Field placeholder={'job'} name={"aboutMe"} component={Input} validate={[required, maxLength]} type="text" />
       </div>
       <div>
-         <b>contact</b>
-         <b>github</b>  <Field placeholder={'github'} name={"contacts.github"} component={Input} validate={[required, maxLength]} type="text" />
-         <b>vk</b>  <Field placeholder={'vk'} name={"contacts.vk"} component={Input} validate={[required, maxLength]} type="text" />
-         <b>facebook</b>  <Field placeholder={'facebook'} name={"contacts.facebook"} component={Input} validate={[required, maxLength]} type="text" />
+         <b>fullName</b> <Field placeholder={'job'} name={"fullName"} component={Input} validate={[required, maxLength]} type="text" />
+      </div>
+      <div>
+         <b>job</b> <Field placeholder={'job'} name={"lookingForAJobDescription"} component={Input} validate={[required, maxLength]} type="text" />
       </div>
       <div><button>Отправить</button></div>
    </form>

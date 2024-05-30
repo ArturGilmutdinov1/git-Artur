@@ -8,6 +8,7 @@ import { Input } from "../common/Preloader/FormControll/FormControl";
 
 
 const LoginForm = (props) => {
+   debugger
    const maxLength = maxLengthCreator(50)
    return <form onSubmit={props.handleSubmit}>
       <div>
@@ -19,6 +20,8 @@ const LoginForm = (props) => {
       <div>
          <Field component={Input} name={"reremberMe"} type="checkbox" />
       </div>
+      {props.captcha && <div><img src={props.captcha} alt="" /></div>}
+      {props.captcha && <div> введите капчу<Field placeholder={'captcha'} name={"captcha"} component={Input} type="text" /></div>}
       <div>
          <button>войти </button>
       </div>
@@ -28,8 +31,9 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({ form: 'contact' })(LoginForm)
 
 const Login = (props) => {
+   debugger
    const onSubmit = (formData) => {
-      props.login(formData.email, formData.password, formData.reremberMe)
+      props.login(formData.email, formData.password, formData.reremberMe, formData.captcha)
    }
 
 
@@ -40,16 +44,19 @@ const Login = (props) => {
    else {
       return <main>
          <h2 >
-            регистрация
+            вход
          </h2>
-         <LoginReduxForm onSubmit={onSubmit} />
+         <LoginReduxForm captcha={props.captcha} onSubmit={onSubmit} />
       </main>
    }
 }
 
 
 let mapStateToProps = (state) => {
-   return { isAuth: state.auth.isAuth }
+   return {
+      isAuth: state.auth.isAuth,
+      captcha: state.auth.CaptchaURL
+   }
 }
 
 

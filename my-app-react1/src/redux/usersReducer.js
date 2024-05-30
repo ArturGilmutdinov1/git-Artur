@@ -95,26 +95,34 @@ export const getUsers = (currentPage, pageSize) => {
 export const follow = (usersId) => {
    return (dispatch) => {
       dispatch(toggleFollowingProgres(true, usersId))
-      usersApi.follow(usersId)
-         .then(response => {
-            if (response.data.resultCode === 0) {
-               dispatch(acceptFollow(usersId))
-            }
-            dispatch(toggleFollowingProgres(false, usersId))
-         })
+      try {
+         usersApi.follow(usersId)
+            .then(response => {
+               if (response.data.resultCode === 0) {
+                  dispatch(acceptFollow(usersId))
+               }
+               dispatch(toggleFollowingProgres(false, usersId))
+            })
+      } catch (e) {
+         alert(e)
+      }
    }
 }
 
 export const unfollow = (usersId) => {
    return (dispatch) => {
       dispatch(toggleFollowingProgres(true, usersId))
-      usersApi.unfollow(usersId)
-         .then(response => {
-            if (response.data.resultCode === 0) {
-               dispatch(acceptUnfollow(usersId))
-            }
-            dispatch(toggleFollowingProgres(false, usersId))
-         })
+      try {
+         usersApi.unfollow(usersId)
+            .then(response => {
+               if (response.data.resultCode === 0) {
+                  dispatch(acceptUnfollow(usersId))
+               }
+               dispatch(toggleFollowingProgres(false, usersId))
+            })
+      } catch (e) {
+         alert(e)
+      }
    }
 }
 
